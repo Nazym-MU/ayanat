@@ -1,38 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+:root {
+  --light-green: #d1e8e2;
+  --pastel-green: #c2e8c1;
+  --medium-green: #7ecf7e;
+  --dark-green: #116530;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, button {
+  cursor: none;
+}
+
+.custom-cursor {
+  width: 20px;
+  height: 20px;
+  background-color: var(--medium-green);
+  position: fixed;
+  z-index: 9999;
+  pointer-events: none;
+  mix-blend-mode: difference;
+  transition: transform 0.1s ease;
+}
+
+button:hover {
+  background-color: var(--dark-green);
+  transform: scale(1.05);
+  cursor: none;
+}
+
 .App {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+header {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+h1 {
+  font-size: 3rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+h2 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  text-align: center;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+p {
+  font-size: 1.2rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.portfolio {
+  padding: 4rem 0;
+}
+
+.artwork {
+  background-color: var(--pastel-green);
+  border-radius: 15px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  transition: transform 0.3s ease;
+  cursor: none;
+}
+
+.artwork:hover {
+  transform: translateY(-5px);
+}
+
+.artwork h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.contact {
+  text-align: center;
+  padding: 4rem 0;
+}
+
+button {
+  background-color: var(--medium-green);
   color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin-top: 2rem;
 }
 
-.App-link {
-  color: #61dafb;
+/* Fun elements */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+header::before {
+  content: '🎨';
+  font-size: 4rem;
+  position: absolute;
+  top: 20%;
+  left: 10%;
+  animation: float 6s ease-in-out infinite;
+}
+
+header::after {
+  content: '🖌️';
+  font-size: 4rem;
+  position: absolute;
+  bottom: 20%;
+  right: 10%;
+  animation: float 5s ease-in-out infinite;
+}
+
+.artwork::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  background: var(--medium-green);
+  z-index: -1;
+  border-radius: 20px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.artwork:hover::before {
+  opacity: 0.2;
+}
+
+
+.lang-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: var(--medium-green);
+  color: white;
+  border: none;
+  width: 50px;
+  height: 50px;
+  font-size: 1.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.lang-toggle:hover {
+  background-color: var(--dark-green);
 }
