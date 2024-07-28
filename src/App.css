@@ -172,25 +172,30 @@ body {
 /* Fullscreen overlay for images */
 .fullscreen-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 5%;
+  left: 5%;
+  width: 90%;
+  height: 90%;
   background-color: rgba(0, 0, 0, 0.8);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 999;
-  cursor: none;
+  overflow: auto;
 }
 
 .fullscreen-image {
   position: relative;
+  max-width: 80vw; 
+  max-height: 80vh;
 }
 
 .fullscreen-image img {
-  max-width: 90%;
-  max-height: 90%;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
 }
 
 .close-button {
@@ -201,8 +206,9 @@ body {
   border: none;
   font-size: 2rem;
   color: white;
-  cursor: none;
+  cursor: pointer;
 }
+
 
 @media (max-width: 767px) {
   .portfolio-cards {

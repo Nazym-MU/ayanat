@@ -25,10 +25,22 @@ function PortfolioCards() {
   
   useEffect(() => {
     const initialCards = [
-      { id: 1, image: '/Starry Night by Van Gogh.jpg', title: 'Artwork 1', medium: 'Oil on canvas', size: '24x36 inches', date: '2023' },
-      { id: 2, image: '/Cafe Terrace on Forum.jpg', title: 'Artwork 2', medium: 'Acrylic on wood', size: '18x24 inches', date: '2024' },
-      { id: 3, image: '/Sunflowers by Van Gogh.jpg', title: 'Artwork 3', medium: 'Oil on canvas', size: '24x36 inches', date: '2023' },
-    ];
+      { id: 1, image: '/Perspective drawing.jpeg', title: 'Perspective drawing', medium: 'Watercolour pencils + black pen', size: 'A2', date: 'October 2023' },
+      { id: 2, image: '/Watercolour pencil portrait.jpeg', title: 'Portrait', medium: 'Watercolour pencils', size: 'December 2023', date: 'December 2023' },
+      { id: 3, image: '/December 2023.jpeg', medium: 'Digital', date: 'December 2023' },
+      { id: 4, image: '/January 2024.jpeg', title: 'Portrait', medium: 'Digital', date: 'January 2024' },
+      { id: 5, image: '/February 2024.jpeg', medium: 'Digital', date: 'February 2024' },
+      { id: 6, image: '/Observational drawing.jpeg', title: 'Observational drawing', medium: 'Watercolour pencils + black pen', size: 'A4', date: 'March 2024' },
+      { id: 7, image: '/March 2024.jpeg', medium: 'Digital', date: 'March 2024' },
+      { id: 8, image: '/Constructive drawing.jpeg', size: 'A4', date: 'May 2024' },
+      { id: 9, image: '/May 2024.jpeg', medium: 'Digital', date: 'May 2024' },
+      { id: 10, image: '/June 2024.jpeg', medium: 'Digital', date: 'June 2024' },
+      { id: 11, image: '/Live drawing.jpeg', title: 'Observational drawing', size: 'A5', date: 'June 2024' },
+      { id: 12, image: '/Perspective practice.jpeg', size: 'A4', date: 'June 2024' },
+      { id: 13, image: '/Драпировка.jpeg', title: 'Драпировка', size: 'A4', date: 'June 2024' },
+      { id: 14, image: '/Натюрморт.jpeg', title: 'Натюрморт', size: 'A3', date: 'June 2024' },
+      { id: 15, image: '/Sushi.png', title: 'Sushi', medium: 'Blender 3D model', date: 'July 2024' },
+    ].reverse();
     const container = containerRef.current;
     const centerX = (container.offsetWidth - 300) / 2;
     const centerY = (container.offsetHeight - 400) / 2;
@@ -44,8 +56,8 @@ function PortfolioCards() {
 
   const bind = useDrag(({ args: [index], down, movement: [mx, my], memo = [cards[index].x, cards[index].y] }) => {
     const container = containerRef.current;
-    const cardWidth = isMobile ? 200 : 300;
-    const cardHeight = isMobile ? 250 : 400;
+    const cardWidth = isMobile ? 220 : 320;
+    const cardHeight = isMobile ? 260 : 420;
 
     let newX = memo[0] + mx;
     let newY = memo[1] + my;
@@ -78,21 +90,21 @@ function PortfolioCards() {
             left: `${card.x}px`,
             top: `${card.y}px`,
             zIndex: card.zIndex,
-            width: isMobile ? '200px' : '300px',
-            height: isMobile ? '250px' : '400px',
+            width: isMobile ? '220px' : '320px',
+            height: isMobile ? '260px' : '420px',
             transform: `rotate(${card.rotation}deg)`,
           }}
           className="card"
         >
           <img 
             src={card.image} 
-            alt={card.title} 
+            alt={card.title || 'Artwork'}
             onClick={() => setFullscreenImage(card.image)} 
           />
           <div className="card-info">
-            <h3>{card.title}</h3>
-            <p>Medium: {card.medium}</p>
-            <p>Size: {card.size}</p>
+            {card.title && <h3>{card.title}</h3>}
+            {card.medium && <p>Medium: {card.medium}</p>}
+            {card.size && <p>Size: {card.size}</p>}
             <p>Date: {card.date}</p>
           </div>
         </animated.div>
