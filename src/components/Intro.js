@@ -8,7 +8,7 @@ function Intro({ scrollY }) {
       <div className="floating-element square"></div>
       <div className="floating-element triangle"></div>
       <h1>
-        <FormattedMessage id="intro.title" defaultMessage="I am {name} and I am an artist." values={{ name: 'Ayanat' }} />
+        <FormattedMessage id="intro.title" defaultMessage="I am Ayanat and I am an artist." />
       </h1>
       <p><FormattedMessage id="intro.description" defaultMessage="Additional intro text here." /></p>
     </section>

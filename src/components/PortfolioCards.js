@@ -4,6 +4,8 @@ import { useDrag } from 'react-use-gesture';
 
 function PortfolioCards() {
   const [cards, setCards] = useState([]);
+  const [topZIndex, setTopZIndex] = useState(1);
+  const [fullscreenImage, setFullscreenImage] = useState(null);
   const containerRef = useRef(null);
 
   useEffect(() => {
@@ -12,22 +14,22 @@ function PortfolioCards() {
       { id: 2, image: '/Cafe Terrace on Forum.jpg', title: 'Artwork 2', medium: 'Acrylic on wood', size: '18x24 inches', date: '2024' },
       { id: 3, image: '/Sunflowers by Van Gogh.jpg', title: 'Artwork 3', medium: 'Oil on canvas', size: '24x36 inches', date: '2023' },
     ];
-
     const container = containerRef.current;
-    const centerX = (container.offsetWidth - 300) / 2; 
-    const centerY = (container.offsetHeight - 400) / 2; 
+    const centerX = (container.offsetWidth - 300) / 2;
+    const centerY = (container.offsetHeight - 400) / 2;
 
     setCards(initialCards.map(card => ({
       ...card,
       x: centerX,
       y: centerY,
-      rotation: Math.random() * 20 - 10,
+      zIndex: 1,
+      rotation: Math.random() * 10 - 5,
     })));
   }, []);
 
   const bind = useDrag(({ args: [index], down, movement: [mx, my], memo = [cards[index].x, cards[index].y] }) => {
     const container = containerRef.current;
-    const cardWidth = 300; 
+    const cardWidth = 300;
     const cardHeight = 400;
 
     let newX = memo[0] + mx;
@@ -39,10 +41,15 @@ function PortfolioCards() {
     setCards(prevCards => 
       prevCards.map((card, i) => 
         i === index 
-          ? { ...card, x: newX, y: newY }
+          ? { ...card, x: newX, y: newY, zIndex: down ? topZIndex : card.zIndex }
           : card
       )
     );
+
+    if (down) {
+      setTopZIndex(prev => prev + 1);
+    }
+
     return memo;
   });
 
@@ -55,14 +62,18 @@ function PortfolioCards() {
           style={{
             left: `${card.x}px`,
             top: `${card.y}px`,
-            zIndex: cards.length - index,
+            zIndex: card.zIndex,
             width: '300px',
             height: '400px',
             transform: `rotate(${card.rotation}deg)`,
           }}
           className="card"
         >
-          <img src={card.image} alt={card.title} />
+          <img 
+            src={card.image} 
+            alt={card.title} 
+            onClick={() => setFullscreenImage(card.image)} 
+          />
           <div className="card-info">
             <h3>{card.title}</h3>
             <p>{card.medium}</p>
@@ -71,6 +82,14 @@ function PortfolioCards() {
           </div>
         </animated.div>
       ))}
+      {fullscreenImage && (
+        <div className="fullscreen-overlay" onClick={() => setFullscreenImage(null)}>
+          <div className="fullscreen-image">
+            <img src={fullscreenImage} alt="Fullscreen view" />
+            <button className="close-button" onClick={() => setFullscreenImage(null)}>×</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

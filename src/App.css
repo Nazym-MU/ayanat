@@ -110,7 +110,7 @@ body {
   background: white;
   border-radius: 10px;
   box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-  cursor: grab;
+  cursor: none;
   overflow: hidden;
   transition: box-shadow 0.3s ease;
   touch-action: none;
@@ -118,13 +118,13 @@ body {
 
 .card:hover {
   box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-  cursor: none;
 }
 
 .card img {
   width: 100%;
   height: 60%;
   object-fit: cover;
+  cursor: none;
 }
 
 .card-info {
@@ -193,7 +193,7 @@ body {
   border: 1px solid #333;
   padding: 5px 10px;
   margin-left: 5px;
-  cursor: pointer;
+  cursor: none;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -212,15 +212,52 @@ body {
   cursor: none;
 }
 
+/* Fullscreen overlay for images */
+.fullscreen-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  cursor: none;
+}
+
+.fullscreen-image {
+  position: relative;
+}
+
+.fullscreen-image img {
+  max-width: 90%;
+  max-height: 90%;
+}
+
+.close-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: white;
+  cursor: none;
+}
+
 @media (max-width: 768px) {
-  .portfolio-cards {
-    height: auto;
-    padding: 20px;
+  body {
+    cursor: default;
+  }
+  
+  .card {
+    width: 200px;
+    height: 280px;
   }
 
-  .card {
-    margin-bottom: 20px;
-    width: 100px;
-    height: 150px;
+  .social-links a {
+    cursor: default;
   }
 }
