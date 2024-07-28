@@ -8,6 +8,22 @@ function PortfolioCards() {
   const [fullscreenImage, setFullscreenImage] = useState(null);
   const containerRef = useRef(null);
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkIfMobile();
+
+    window.addEventListener('resize', checkIfMobile);
+
+    return () => {
+      window.removeEventListener('resize', checkIfMobile);
+    };
+  }, []);
+  
   useEffect(() => {
     const initialCards = [
       { id: 1, image: '/Starry Night by Van Gogh.jpg', title: 'Artwork 1', medium: 'Oil on canvas', size: '24x36 inches', date: '2023' },
@@ -63,8 +79,8 @@ function PortfolioCards() {
             left: `${card.x}px`,
             top: `${card.y}px`,
             zIndex: card.zIndex,
-            width: '300px',
-            height: '400px',
+            width: isMobile ? '200px' : '300px', 
+            height: isMobile ? '250px' : '400px',
             transform: `rotate(${card.rotation}deg)`,
           }}
           className="card"

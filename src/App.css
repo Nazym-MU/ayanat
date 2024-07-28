@@ -247,17 +247,14 @@ body {
   cursor: none;
 }
 
-@media (max-width: 768px) {
-  body {
-    cursor: default;
-  }
-  
+@media (max-width: 767px) {
   .card {
     width: 200px;
-    height: 280px;
+    height: 250px;
+    cursor: default;
   }
 
-  .social-links a {
-    cursor: default;
+  .portfolio-cards {
+    overflow-x: hidden; 
   }
 }
