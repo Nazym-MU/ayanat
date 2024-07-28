@@ -5,7 +5,7 @@ body {
   font-family: 'Arial', sans-serif;
   background-color: #f0f0f0;
   color: #333;
-  cursor: none;
+  cursor: none; /* Ensure custom cursor is used */
 }
 
 .App {
@@ -29,68 +29,24 @@ body {
 .intro h1 {
   font-size: 3rem;
   margin-bottom: 1rem;
-  animation: fadeIn 1s ease-out, float 3s ease-in-out infinite;
+  animation: fadeIn 1s ease-out;
 }
 
 .intro p {
   font-size: 1.5rem;
   max-width: 600px;
-  animation: slideUp 1s ease-out, float 4s ease-in-out infinite;
+  animation: fadeIn 1s ease-out;
 }
 
 .floating-element {
   position: absolute;
   opacity: 0.7;
-}
-
-.circle {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background-color: #ff6b6b;
-  top: 20%;
-  left: 20%;
-  animation: float 5s ease-in-out infinite;
-}
-
-.square {
-  width: 40px;
-  height: 40px;
-  background-color: #4ecdc4;
-  top: 70%;
-  right: 20%;
-  animation: float 7s ease-in-out infinite, rotate 10s linear infinite;
-}
-
-.triangle {
-  width: 0;
-  height: 0;
-  border-left: 30px solid transparent;
-  border-right: 30px solid transparent;
-  border-bottom: 52px solid #feca57;
-  top: 40%;
-  right: 30%;
-  animation: float 6s ease-in-out infinite, rotate 8s linear infinite;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-20px); }
-}
-
-@keyframes rotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  display: none; /* Disable floating elements */
 }
 
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
-}
-
-@keyframes slideUp {
-  from { transform: translateY(20px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
 }
 
 /* PortfolioCards.css */
@@ -101,6 +57,7 @@ body {
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  padding: 0; /* Remove padding for full width */
 }
 
 .card {
@@ -213,7 +170,6 @@ body {
 }
 
 /* Fullscreen overlay for images */
-
 .fullscreen-overlay {
   position: fixed;
   top: 0;
@@ -249,45 +205,21 @@ body {
 }
 
 @media (max-width: 767px) {
+  .portfolio-cards {
+    padding: 0;
+  }
+
   .card {
     width: 200px;
     height: 250px;
-    cursor: default;
   }
 
   .intro h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
+    font-size: 2.5rem;
   }
-  
+
   .intro p {
-    font-size: 1.5rem;
-    max-width: 600px;
-  }
-  
-  .floating-element {
-    display: none;
-  }
-  
-  .portfolio-cards {
-    position: relative;
-    height: 100vh;
-    width: 100%; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    padding: 0; 
-    margin: 0; 
-  }
-  
-  .card img {
-    width: 100%;
-    height: 60%;
-    object-fit: cover;
-  }
-  
-  .card-info {
-    padding: 20px;
+    font-size: 1.2rem;
+    max-width: 90%;
   }
 }

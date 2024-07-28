@@ -7,7 +7,6 @@ function PortfolioCards() {
   const [topZIndex, setTopZIndex] = useState(1);
   const [fullscreenImage, setFullscreenImage] = useState(null);
   const containerRef = useRef(null);
-
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -45,8 +44,8 @@ function PortfolioCards() {
 
   const bind = useDrag(({ args: [index], down, movement: [mx, my], memo = [cards[index].x, cards[index].y] }) => {
     const container = containerRef.current;
-    const cardWidth = 300;
-    const cardHeight = 400;
+    const cardWidth = isMobile ? 200 : 300;
+    const cardHeight = isMobile ? 250 : 400;
 
     let newX = memo[0] + mx;
     let newY = memo[1] + my;
@@ -79,7 +78,7 @@ function PortfolioCards() {
             left: `${card.x}px`,
             top: `${card.y}px`,
             zIndex: card.zIndex,
-            width: isMobile ? '200px' : '300px', 
+            width: isMobile ? '200px' : '300px',
             height: isMobile ? '250px' : '400px',
             transform: `rotate(${card.rotation}deg)`,
           }}
@@ -92,16 +91,16 @@ function PortfolioCards() {
           />
           <div className="card-info">
             <h3>{card.title}</h3>
-            <p>{card.medium}</p>
-            <p>{card.size}</p>
-            <p>{card.date}</p>
+            <p>Medium: {card.medium}</p>
+            <p>Size: {card.size}</p>
+            <p>Date: {card.date}</p>
           </div>
         </animated.div>
       ))}
       {fullscreenImage && (
         <div className="fullscreen-overlay" onClick={() => setFullscreenImage(null)}>
           <div className="fullscreen-image">
-            <img src={fullscreenImage} alt="Fullscreen view" />
+            <img src={fullscreenImage} alt="Fullscreen artwork" />
             <button className="close-button" onClick={() => setFullscreenImage(null)}>×</button>
           </div>
         </div>
