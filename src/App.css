@@ -1,175 +1,213 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
-
-:root {
-  --light-green: #d1e8e2;
-  --pastel-green: #c2e8c1;
-  --medium-green: #7ecf7e;
-  --dark-green: #116530;
-}
-
-* {
+/* App.css */
+body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-}
-
-body, button {
-  cursor: none;
-}
-
-.custom-cursor {
-  width: 20px;
-  height: 20px;
-  background-color: var(--medium-green);
-  position: fixed;
-  z-index: 9999;
-  pointer-events: none;
-  mix-blend-mode: difference;
-  transition: transform 0.1s ease;
-}
-
-button:hover {
-  background-color: var(--dark-green);
-  transform: scale(1.05);
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f0f0;
+  color: #333;
   cursor: none;
 }
 
 .App {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 20px;
 }
 
-header {
+/* Intro.css */
+.intro {
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
+  position: relative;
+  overflow: hidden;
 }
 
-h1 {
+.intro h1 {
   font-size: 3rem;
-  font-weight: 600;
   margin-bottom: 1rem;
+  animation: fadeIn 1s ease-out, float 3s ease-in-out infinite;
 }
 
-h2 {
-  font-size: 2.5rem;
-  font-weight: 600;
-  margin-bottom: 2rem;
-  text-align: center;
-}
-
-p {
-  font-size: 1.2rem;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.portfolio {
-  padding: 4rem 0;
-}
-
-.artwork {
-  background-color: var(--pastel-green);
-  border-radius: 15px;
-  padding: 2rem;
-  margin-bottom: 2rem;
-  transition: transform 0.3s ease;
-  cursor: none;
-}
-
-.artwork:hover {
-  transform: translateY(-5px);
-}
-
-.artwork h3 {
+.intro p {
   font-size: 1.5rem;
-  margin-bottom: 1rem;
+  max-width: 600px;
+  animation: slideUp 1s ease-out, float 4s ease-in-out infinite;
 }
 
-.contact {
-  text-align: center;
-  padding: 4rem 0;
-}
-
-button {
-  background-color: var(--medium-green);
-  color: white;
-  border: none;
-  padding: 1rem 2rem;
-  font-size: 1.2rem;
-  border-radius: 50px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-  margin-top: 2rem;
-}
-
-/* Fun elements */
-@keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
-  100% { transform: translateY(0px); }
-}
-
-header::before {
-  content: '🎨';
-  font-size: 4rem;
+.floating-element {
   position: absolute;
+  opacity: 0.7;
+}
+
+.circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #ff6b6b;
   top: 20%;
-  left: 10%;
-  animation: float 6s ease-in-out infinite;
-}
-
-header::after {
-  content: '🖌️';
-  font-size: 4rem;
-  position: absolute;
-  bottom: 20%;
-  right: 10%;
+  left: 20%;
   animation: float 5s ease-in-out infinite;
 }
 
-.artwork::before {
-  content: '';
-  position: absolute;
-  top: -10px;
-  left: -10px;
-  right: -10px;
-  bottom: -10px;
-  background: var(--medium-green);
-  z-index: -1;
-  border-radius: 20px;
-  opacity: 0;
-  transition: opacity 0.3s ease;
+.square {
+  width: 40px;
+  height: 40px;
+  background-color: #4ecdc4;
+  top: 70%;
+  right: 20%;
+  animation: float 7s ease-in-out infinite, rotate 10s linear infinite;
 }
 
-.artwork:hover::before {
-  opacity: 0.2;
+.triangle {
+  width: 0;
+  height: 0;
+  border-left: 30px solid transparent;
+  border-right: 30px solid transparent;
+  border-bottom: 52px solid #feca57;
+  top: 40%;
+  right: 30%;
+  animation: float 6s ease-in-out infinite, rotate 8s linear infinite;
 }
 
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
 
-.lang-toggle {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background-color: var(--medium-green);
-  color: white;
-  border: none;
-  width: 50px;
-  height: 50px;
-  font-size: 1.5rem;
-  border-radius: 50%;
-  cursor: pointer;
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* PortfolioCards.css */
+.portfolio-cards {
+  position: relative;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.card {
+  position: absolute;
+  width: 300px;
+  height: 400px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  cursor: grab;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+  touch-action: none;
+}
+
+.card:hover {
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+  cursor: none;
+}
+
+.card img {
+  width: 100%;
+  height: 60%;
+  object-fit: cover;
+}
+
+.card-info {
+  padding: 20px;
+}
+
+.card-info h3 {
+  margin: 0 0 10px;
+  font-size: 1.2rem;
+}
+
+.card-info p {
+  margin: 5px 0;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Contact.css */
+.contact {
+  text-align: center;
+  padding: 50px 0;
+}
+
+.contact h2 {
+  margin-bottom: 20px;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.social-links a {
+  color: #333;
+  font-size: 24px;
+  transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+  color: #007bff;
+  cursor: none;
+}
+
+/* CustomCursor.css */
+.custom-cursor {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #333;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.1s ease;
+}
+
+/* LanguageToggle.css */
+.language-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
   z-index: 1000;
 }
 
-.lang-toggle:hover {
-  background-color: var(--dark-green);
+.language-toggle button {
+  background: none;
+  border: 1px solid #333;
+  padding: 5px 10px;
+  margin-left: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.language-toggle button.active {
+  background-color: #333;
+  color: white;
+}
+
+.language-toggle button:hover {
+  background-color: #eee;
+  cursor: none;
+}
+
+.language-toggle button.active:hover {
+  background-color: #444;
+  cursor: none;
 }
