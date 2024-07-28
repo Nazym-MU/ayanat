@@ -8,7 +8,7 @@ function CustomCursor() {
     const updatePosition = (e) => setPosition({ x: e.clientX, y: e.clientY });
     window.addEventListener('mousemove', updatePosition);
 
-    const updateRotation = () => setRotation((prev) => prev + 1);
+    const updateRotation = () => setRotation((prev) => prev + 5);
     window.addEventListener('scroll', updateRotation);
 
     return () => {
