@@ -211,3 +211,16 @@ body {
   background-color: #444;
   cursor: none;
 }
+
+@media (max-width: 768px) {
+  .portfolio-cards {
+    height: auto;
+    padding: 20px;
+  }
+
+  .card {
+    margin-bottom: 20px;
+    width: 100px;
+    height: 150px;
+  }
+}

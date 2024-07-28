@@ -30,7 +30,6 @@ function PortfolioCards() {
     const cardWidth = 300; 
     const cardHeight = 400;
 
-    // Calculate new position
     let newX = memo[0] + mx;
     let newY = memo[1] + my;
 
