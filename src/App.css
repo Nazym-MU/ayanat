@@ -213,6 +213,7 @@ body {
 }
 
 /* Fullscreen overlay for images */
+
 .fullscreen-overlay {
   position: fixed;
   top: 0;
@@ -254,7 +255,39 @@ body {
     cursor: default;
   }
 
+  .intro h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  
+  .intro p {
+    font-size: 1.5rem;
+    max-width: 600px;
+  }
+  
+  .floating-element {
+    display: none;
+  }
+  
   .portfolio-cards {
-    overflow-x: hidden; 
+    position: relative;
+    height: 100vh;
+    width: 100%; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    padding: 0; 
+    margin: 0; 
+  }
+  
+  .card img {
+    width: 100%;
+    height: 60%;
+    object-fit: cover;
+  }
+  
+  .card-info {
+    padding: 20px;
   }
 }
