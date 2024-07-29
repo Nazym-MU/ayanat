@@ -9,7 +9,7 @@ function Contact() {
       <div className="social-links">
         <a href="https://www.instagram.com/kosqaras/" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
         <a href="https://t.me/kosqaras" target="_blank" rel="noopener noreferrer"><FaTelegram /></a>
-        <a href="https://wa.me/87018005682" target="_blank" rel="noopener noreferrer"><FaWhatsapp /></a>
+        <a href="https://wa.me/+77018005682" target="_blank" rel="noopener noreferrer"><FaWhatsapp /></a>
         <a href="mailto:ayanatkz@icloud.com"><FaEnvelope /></a>
       </div>
     </section>
