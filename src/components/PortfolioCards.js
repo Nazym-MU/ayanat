@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 const initialCards = [
   { id: 1, mediaType: 'image', image: '/Perspective drawing.jpeg', title: 'Perspective drawing', medium: 'Watercolour pencils + black pen', size: 'A2', date: 'October 2023' },
@@ -21,36 +21,86 @@ const initialCards = [
   { id: 18, mediaType: 'video', video: '/2D Animation, July 2024.mp4', title: '2D animation', date: 'July 2024' }
 ].reverse();
 
+
+const categories = [
+  { name: '2D Animation', filter: card => card.title && card.title.toLowerCase().includes('animation') },
+  { name: 'Watercolor Pencil', filter: card => card.medium && card.medium.toLowerCase().includes('watercolour pencil') },
+  { name: 'Drawings', filter: card => card.title && (card.title.toLowerCase().includes('drawing') || card.title.toLowerCase().includes('драпировка') || card.title.toLowerCase().includes('натюрморт')) },
+  { name: 'Digital Art', filter: card => card.medium && card.medium.toLowerCase().includes('digital') },
+  { name: '3D Models', filter: card => card.medium && card.medium.toLowerCase().includes('blender 3d') },
+];
+
 const Portfolio = () => {
+  const [selectedImage, setSelectedImage] = useState(null);
+  const fullscreenRef = useRef(null);
+
+  const handleImageClick = (card) => {
+    setSelectedImage(card);
+  };
+
+  const handleCloseFullscreen = (e) => {
+    if (e.target === fullscreenRef.current) {
+      setSelectedImage(null);
+    }
+  };
+
+  useEffect(() => {
+    const handleEscapeKey = (e) => {
+      if (e.key === 'Escape') {
+        setSelectedImage(null);
+      }
+    };
+
+    document.addEventListener('keydown', handleEscapeKey);
+
+    return () => {
+      document.removeEventListener('keydown', handleEscapeKey);
+    };
+  }, []);
+
   return (
     <div className="portfolio-container">
       <header className="portfolio-header">
         <h1>My Art Portfolio</h1>
       </header>
-      <div className="portfolio-gallery">
-        {initialCards.map((card, index) => (
-          <React.Fragment key={card.id}>
-            {index > 0 && index % 3 === 0 && (
-              <div className="section-divider">
-                <span>{new Date(card.date).getFullYear()}</span>
+      {categories.map(category => (
+        <div key={category.name} className="category-section">
+          <h2>{category.name}</h2>
+          <div className="portfolio-gallery">
+            {initialCards.filter(category.filter).map(card => (
+              <div key={card.id} className="portfolio-card" onClick={() => handleImageClick(card)}>
+                {card.mediaType === 'image' ? (
+                  <img src={card.image} alt={card.title || card.medium} className="card-media" />
+                ) : (
+                  <video src={card.video} controls className="card-media" />
+                )}
+                <div className="card-info">
+                  <h3>{card.title || card.medium}</h3>
+                  {card.medium && <p className="card-medium">{card.medium}</p>}
+                  {card.size && <p className="card-size">{card.size}</p>}
+                  <p className="card-date">{card.date}</p>
+                </div>
               </div>
+            ))}
+          </div>
+        </div>
+      ))}
+      {selectedImage && (
+        <div className="fullscreen-overlay" ref={fullscreenRef} onClick={handleCloseFullscreen}>
+          <div className="fullscreen-content">
+            <button className="close-button" onClick={() => setSelectedImage(null)}>×</button>
+            {selectedImage.mediaType === 'image' ? (
+              <img
+                src={selectedImage.image}
+                alt={selectedImage.title || selectedImage.medium}
+                className="fullscreen-media"
+              />
+            ) : (
+              <video src={selectedImage.video} controls className="fullscreen-media" />
             )}
-            <div className="portfolio-card">
-              {card.mediaType === 'image' ? (
-                <img src={card.image} alt={card.title || card.medium} className="card-media" />
-              ) : (
-                <video src={card.video} controls className="card-media" />
-              )}
-              <div className="card-info">
-                <h3>{card.title || card.medium}</h3>
-                {card.medium && <p className="card-medium">{card.medium}</p>}
-                {card.size && <p className="card-size">{card.size}</p>}
-                <p className="card-date">{card.date}</p>
-              </div>
-            </div>
-          </React.Fragment>
-        ))}
-      </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
