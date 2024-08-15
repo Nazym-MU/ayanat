@@ -19,7 +19,7 @@ const initialCards = [
   { id: 16, mediaType: 'video', video: '/Animation practice, March 2024.mp4', title: 'Animation practice', date: 'March 2024' },
   { id: 17, mediaType: 'video', video: '/2D Animation, April 2024.mp4', title: '2D animation', date: 'April 2024' },
   { id: 18, mediaType: 'video', video: '/2D Animation, July 2024.mp4', title: '2D animation', date: 'July 2024' },
-  { id: 19, mediaType: 'video', video: '/Starship.mp4', title: 'Starship animation', medium: 'Blender 2D animation', date: 'August 2024' },
+  { id: 19, mediaType: 'video', video: '/Starship.mp4', title: 'Starship animation', medium: 'Blender 3D animation', date: 'August 2024' },
 ].reverse();
 
 
