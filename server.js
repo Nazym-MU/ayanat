@@ -2,14 +2,18 @@ import express from 'express';
 import session from 'express-session';
 import passport from 'passport';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
-import pg from 'pg';  
+import pg from 'pg';
 import dotenv from 'dotenv';
 
 dotenv.config();
 
 const { Pool } = pg;
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  database: process.env.DB_DATABASE
 });
 
 const app = express();
@@ -71,6 +75,16 @@ app.get('/oauth/callback',
     res.redirect('/admin');
   }
 );
+
+app.get('/api/portfolio', async (req, res) => {
+    try {
+      const result = await pool.query('SELECT * FROM portfolio_items');
+      res.json(result.rows);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Database error' });
+    }
+  });
 
 function isAdmin(req, res, next) {
   if (req.isAuthenticated() && req.user.role === 'admin') {
