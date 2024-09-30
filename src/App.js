@@ -7,31 +7,28 @@ import LanguageToggle from './components/LanguageToggle';
 import { IntlProvider } from 'react-intl';
 import messages from './messages';
 import './App.css';
+import connectDB from '../db';
+import express from 'express';
+import Artwork from '../models/artworks';
 
-/*
-Further plans (September 13 - September 14):
 
-Database:
-- Create a postgreSQL database
-- Connect the database to the portfolio
-- Add an upload, edit, and delete functionality for the projects
-- Add a login functionality only for the admin
+connectDB();
 
-UI:
-- Add dark mode
-- Add a scroll to top button
-- Add a footer
+const app = express();
 
-Contact:
-- Add a contact form to send an email to the admin
+app.get('/api/artworks', async (req, res) => {
+  try {
+    const artworks = await Artwork.find(); // Fetch all artworks
+    res.json(artworks);
+  } catch (err) {
+    res.status(500).send('Server error');
+  }
+});
 
-Mobile:
-- Make the portfolio responsive for mobile devices
+app.listen(5000, () => {
+  console.log('Server running on port 5000');
+});
 
-Nice to have:
-- Notifications for the content updates for followers
-- AI assistant to help with the portfolio
-*/
 
 
 function App() {
